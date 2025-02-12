@@ -10,6 +10,14 @@ python3 -m venv locust_lab_venv
 source locust_lab_venv/bin/activate
 python3 -m pip install -r requirements.txt
 
+## windows
+
+Set-ExecutionPolicy Unrestricted -Scope Process
+Yes to all A
+python.exe -m venv locust_lab_venv
+locust_lab_venv\Scripts\Activate.ps1
+python3 -m pip install -r requirements.txt
+
 # run locust as webserver
 
 locust -f locustfile.py --host https://example.com --web-port 9000
@@ -22,11 +30,41 @@ curl -X POST http://localhost:9000/swarm -H "Content-Type: application/json" -d 
 "host": "https://example.com"
 }'
 
+## linux
+
+curl -X POST http://localhost:9000/swarm \
+ -H "Content-Type: application/json" \
+ -d '{
+"users": 10,
+"spawn_rate": 2,
+"host": "http://example.com"
+}'
+
 curl -X POST http://localhost:9000/stop
 
 curl -X GET http://localhost:9000/stats/requests
 
 curl -X GET http://localhost:9000/stats
+
+## windows
+
+curl.exe -X POST http://localhost:9000/swarm -H "Content-Type: application/json" \
+ -d '{
+"users": 10,
+"spawn_rate": 2,
+"host": "http://example.com"
+}'
+curl.exe -X POST http://localhost:9000/swarm -H "Content-Type: application/json" -d '{"users": 10, "spawn_rate": 2, "host": "http://example.com"}'
+
+curl.exe --% -X POST http://localhost:9000/swarm -H "Content-Type: application/json" -d "{ \"user_count\": 10, \"users\": 10, \"spawn_rate\": 2, \"host\": \"http://example.com\" }"
+
+Invoke-RestMethod -Uri "http://localhost:9000/swarm" -Method Post -Headers @{ "Content-Type"="application/json" } -Body (@{ user_count=10; spawn_rate=2; host="http://example.com" } | ConvertTo-Json -Compress)
+
+curl.exe -X POST http://localhost:9000/stop
+
+curl.exe -X GET http://localhost:9000/stats/requests
+
+curl.exe -X GET http://localhost:9000/stats
 
 # run locust
 
