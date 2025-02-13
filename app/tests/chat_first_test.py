@@ -7,7 +7,7 @@ class MockUser(User):  # Skapa en dummy User-klass för testning
     def __init__(self, environment):
         super().__init__(environment)
         self.client = HttpSession(  # Ta bort 'environment' från initieringen
-            base_url="http://example.com",  # Ange base_url direkt här
+            base_url="http://192.168.1.101:8000/",  # Ange base_url direkt här
             request_event=environment.events.request,
             user=self
         )
