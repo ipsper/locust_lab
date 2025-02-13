@@ -8,7 +8,7 @@ class MinAnvandare(HttpUser):
     host = "http://192.168.1.101:8000"
 
     @task
-    def halla_hej(self):
+    def get_all_anvandare(self):
         self.client.get("/users")
 
     @task
@@ -21,4 +21,24 @@ class MinAnvandare(HttpUser):
         print(f"Response status code: {response.status_code}")
         print(f"Response text: {response.text}")
 
+    @task
+    def rakna_anvandare(self):
+        self.client.get("/users/count")
+
+    @task
+    def get_all_kort(self):
+        self.client.get("/cards")
+
+    @task
+    def skapa_anvandare(self):
+        namn = fake.name()
+        email = fake.email()
+        cards_data = {"title": namn, "description": email}
+        response = self.client.post("/cards", json=cards_data)
+        print(f"Response status code: {response.status_code}")
+        print(f"Response text: {response.text}")
+
+    @task
+    def rakna_anvandare(self):
+        self.client.get("/cards/count")
 

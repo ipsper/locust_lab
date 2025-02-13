@@ -11,7 +11,7 @@ def test_api():
 
     # Vänta en stund så att testet hinner köra
     import time
-    time.sleep(10)  # Justera tiden efter behov
+    time.sleep(1)  # Justera tiden efter behov
 
     # Stoppa Locust-testet
     env.runner.quit()
@@ -25,5 +25,8 @@ def test_api():
 
     # Du kan också kolla på enskilda requests
     for request in stats.entries.values():
-        assert request.name == "/users"
+        print(f"Request name: {request.name}")
+        print(f"Number of requests: {request.num_requests}")
+        print(f"Average response time: {request.avg_response_time}")
+        assert request.name in ["/users", "/users/count", "/cards", "/cards/count"]  # Exempel: Kolla bara på vissa requests
         assert request.avg_response_time < 500  # Exempel: Max 500ms svarstid
