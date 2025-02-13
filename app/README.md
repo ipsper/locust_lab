@@ -24,6 +24,9 @@ locust -f locustfile.py --host https://example.com --web-port 9000
 
 http://localhost:9000
 
+curl -X POST -H "Content-Type: application/json" -d '{"locust_count": 10, "spawn_rate": 2}' http://127.0.0.1:9000/swarm
+curl -X POST -H "Content-Type: application/json" -d '{"user_count": 10, "spawn_rate": 2}' http://127.0.0.1:9000/swarm
+
 curl -X POST http://localhost:9000/swarm -H "Content-Type: application/json" -d '{
 "user_count": 10,
 "spawn_rate": 2,

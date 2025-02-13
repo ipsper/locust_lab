@@ -1,8 +1,8 @@
-from locust import HttpUser, task, between
+from locust import HttpUser, task
 
-class MyUser(HttpUser):
-    wait_time = between(1, 3)
-
+class HelloWorldUser(HttpUser):
     @task
-    def get_homepage(self):
+    def hello_world(self):
         self.client.get("/")
+        self.client.get("/hello")
+        self.client.get("/world")
