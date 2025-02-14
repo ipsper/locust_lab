@@ -1,5 +1,9 @@
+faker==36.1.0
+locust==2.32.9
+opentelemetry-api==1.29.0
+opentelemetry-sdk==1.29.0
+opentelemetry-exporter-otlp==1.29.0
+opentelemetry-instrumentation-logging==0.50b0
 pip==25.0.1
 pytest==8.3.4
 pytest-html==4.1.1
-locust==2.32.9
-faker==36.1.0
